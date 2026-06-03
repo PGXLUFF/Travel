@@ -37,11 +37,14 @@ const EffortlessTravel = () => {
     <div className="w-full flex flex-col h-full justify-between">
       {/* Header */}
       <div className="mb-8">
-        <span className="text-xs uppercase tracking-wider text-primary/40 font-semibold mb-2 block">
-          Transport
+        <span className="text-xs uppercase tracking-widest font-extrabold text-orange-500 mb-3 block">
+          ✦ Transport
         </span>
         <h2 className="font-display font-bold text-4xl md:text-5xl text-primary leading-tight">
-          Effortless Travel
+          Effortless{" "}
+          <span className="bg-gradient-to-r from-teal-600 to-teal-500 bg-clip-text text-transparent">
+            Travel
+          </span>
         </h2>
       </div>
 
@@ -55,16 +58,16 @@ const EffortlessTravel = () => {
             <button
               key={option.id}
               onClick={() => setActiveId(option.id)}
-              className={`w-full text-left p-5 rounded-[1.8rem] flex items-start gap-5 transition-all duration-300 border focus:outline-none cursor-pointer hover:shadow-sm ${
+              className={`w-full text-left p-5 rounded-[1.8rem] flex items-start gap-5 transition-all duration-300 border focus:outline-none cursor-pointer hover:shadow-md ${
                 isActive
-                  ? "bg-primary text-white border-primary shadow-md transform scale-[1.02]"
-                  : "bg-white text-primary border-black/[0.04] hover:bg-black/[0.01]"
+                  ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white border-orange-400 shadow-lg scale-[1.02]"
+                  : "bg-white text-primary border-black/[0.04] hover:bg-orange-50 hover:border-orange-100"
               }`}
             >
               {/* Icon Container */}
               <div
                 className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-colors ${
-                  isActive ? "bg-white/10 text-white" : "bg-accent text-primary-light"
+                  isActive ? "bg-white/20 text-white" : "bg-orange-50 text-orange-500"
                 }`}
               >
                 <IconComponent size={22} />

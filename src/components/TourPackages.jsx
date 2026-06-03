@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Star, Hotel, Compass, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 
 // 11 Domestic packages with custom details
@@ -82,7 +83,7 @@ const domesticPackages = [
     id: "goa",
     title: "Sunny Goa Beach Vacation",
     location: "North & South Goa",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop&q=80",
+    image: "/Image/tour_goa.png",
     rating: 4.8,
     details: [
       { icon: Hotel, text: "Beachside Resort Stay" },
@@ -94,7 +95,7 @@ const domesticPackages = [
     id: "himachal",
     title: "Himachal Valley Adventure",
     location: "Manali & Shimla, Himachal",
-    image: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=800&auto=format&fit=crop&q=80",
+    image: "/Image/tour_himachal.png",
     rating: 4.9,
     details: [
       { icon: Hotel, text: "Mountain View Cottages" },
@@ -106,7 +107,7 @@ const domesticPackages = [
     id: "kashmir",
     title: "Kashmir Paradise Escape",
     location: "Srinagar & Gulmarg, Kashmir",
-    image: "https://images.unsplash.com/photo-1566228015668-4c45dbc4e2f5?w=800&auto=format&fit=crop&q=80",
+    image: "/Image/tour_kashmir.png",
     rating: 5.0,
     details: [
       { icon: Hotel, text: "Premium Houseboat stay" },
@@ -118,7 +119,7 @@ const domesticPackages = [
     id: "leh-ladakh",
     title: "Leh Ladakh Highlands",
     location: "Leh, Ladakh",
-    image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&auto=format&fit=crop&q=80",
+    image: "/Image/tour_leh_ladakh.png",
     rating: 5.0,
     details: [
       { icon: Hotel, text: "Pangong Tented Camp" },
@@ -130,7 +131,7 @@ const domesticPackages = [
     id: "varanasi",
     title: "Spiritual Varanasi Journey",
     location: "Varanasi, Uttar Pradesh",
-    image: "https://images.unsplash.com/photo-1561361531-997c5d23db16?w=800&auto=format&fit=crop&q=80",
+    image: "/Image/tour_varanasi.png",
     rating: 4.9,
     details: [
       { icon: Hotel, text: "Heritage Riverfront hotel" },
@@ -209,25 +210,30 @@ const TourPackages = ({ onSelectPackage }) => {
   };
 
   return (
-    <section className="w-full px-6 md:px-12 lg:px-24 py-16 flex flex-col">
+    <section className="relative w-full px-6 md:px-12 lg:px-24 py-16 flex flex-col overflow-hidden section-warm">
+      <div className="orange-orb w-[350px] h-[350px] -top-20 -right-20 opacity-50" />
+      <div className="teal-orb w-[300px] h-[300px] bottom-0 -left-20 opacity-40" />
       {/* Header Row */}
-      <div className="w-full flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-12">
+      <div className="relative z-10 w-full flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-12">
         <div className="max-w-[500px] text-left">
-          <span className="text-xs uppercase tracking-wider text-[#3b7c74] font-extrabold mb-2 block">
-            Tour Packages
+          <span className="text-xs uppercase tracking-widest font-extrabold text-orange-500 mb-3 block">
+            ✦ Tour Packages
           </span>
           <h2 className="font-display font-bold text-4xl md:text-5xl text-primary leading-tight">
-            Explore Curated Tour Packages
+            Explore Curated{" "}
+            <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
+              Tour Packages
+            </span>
           </h2>
         </div>
         <div className="flex flex-col md:flex-row items-start md:items-end gap-6 select-none">
           {/* Tab Selector */}
-          <div className="flex bg-[#EAECEE] p-1 rounded-full border border-black/5">
+          <div className="flex bg-white/70 backdrop-blur-sm p-1 rounded-full border border-orange-100 shadow-sm">
             <button
               onClick={() => setActiveTab("domestic")}
-              className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                activeTab === "domestic" 
-                  ? "bg-[#0A221F] text-white shadow-md" 
+              className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
+                activeTab === "domestic"
+                  ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md"
                   : "text-primary/60 hover:text-primary"
               }`}
             >
@@ -235,9 +241,9 @@ const TourPackages = ({ onSelectPackage }) => {
             </button>
             <button
               onClick={() => setActiveTab("international")}
-              className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                activeTab === "international" 
-                  ? "bg-[#0A221F] text-white shadow-md" 
+              className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
+                activeTab === "international"
+                  ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md"
                   : "text-primary/60 hover:text-primary"
               }`}
             >
@@ -249,13 +255,13 @@ const TourPackages = ({ onSelectPackage }) => {
           <div className="flex gap-2.5 self-end">
             <button
               onClick={() => scroll("left")}
-              className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-[#0A221F] hover:text-white transition-all cursor-pointer text-primary"
+              className="w-10 h-10 rounded-full border border-orange-200 bg-white/70 flex items-center justify-center hover:bg-gradient-to-r hover:from-orange-500 hover:to-amber-500 hover:text-white hover:border-transparent transition-all duration-300 cursor-pointer text-primary shadow-sm"
             >
               <ChevronLeft size={18} />
             </button>
             <button
               onClick={() => scroll("right")}
-              className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-[#0A221F] hover:text-white transition-all cursor-pointer text-primary"
+              className="w-10 h-10 rounded-full border border-orange-200 bg-white/70 flex items-center justify-center hover:bg-gradient-to-r hover:from-orange-500 hover:to-amber-500 hover:text-white hover:border-transparent transition-all duration-300 cursor-pointer text-primary shadow-sm"
             >
               <ChevronRight size={18} />
             </button>
@@ -266,12 +272,12 @@ const TourPackages = ({ onSelectPackage }) => {
       {/* Packages Scrollable Row */}
       <div
         ref={scrollContainerRef}
-        className="w-full flex gap-8 overflow-x-auto pb-8 pt-2 no-scrollbar snap-x snap-mandatory"
+        className="relative z-10 w-full flex gap-8 overflow-x-auto pb-8 pt-2 no-scrollbar snap-x snap-mandatory"
       >
         {packages.map((pkg) => (
           <div
             key={pkg.id}
-            className="flex-shrink-0 w-[300px] md:w-[360px] bg-white rounded-[2.5rem] p-4 shadow-md hover:shadow-xl transition-all duration-300 snap-start border border-black/[0.02] flex flex-col justify-between"
+            className="flex-shrink-0 w-[300px] md:w-[360px] bg-white rounded-[2.5rem] p-4 shadow-md snap-start border border-black/[0.02] flex flex-col justify-between premium-card"
           >
             <div>
               {/* Card Image Area */}
@@ -310,7 +316,7 @@ const TourPackages = ({ onSelectPackage }) => {
                       key={index}
                       className="flex items-center gap-3 text-primary/60 text-xs md:text-sm font-medium"
                     >
-                      <Icon size={16} className="text-[#3b7c74]" />
+                      <Icon size={16} className="text-orange-500" />
                       <span>{detail.text}</span>
                     </div>
                   );
@@ -318,13 +324,22 @@ const TourPackages = ({ onSelectPackage }) => {
               </div>
 
               {/* Booking CTA */}
-              <div className="w-full flex justify-between items-center border-t border-black/[0.04] pt-4">
-                <span className="text-[10px] text-primary/45 font-bold uppercase tracking-wider">Plan Your Trip</span>
-                <button 
+              <div className="w-full flex justify-between items-center border-t border-black/[0.04] pt-4 gap-2">
+                {activeTab === "domestic" ? (
+                  <Link
+                    href={`/destinations/${pkg.id}`}
+                    className="px-4 py-2.5 border border-orange-200 text-primary hover:bg-orange-50 rounded-full text-xs font-bold transition-all hover:-translate-y-0.5 cursor-pointer text-center flex-grow"
+                  >
+                    View Details
+                  </Link>
+                ) : (
+                  <span className="text-[10px] text-primary/45 font-bold uppercase tracking-wider">Plan Your Trip</span>
+                )}
+                <button
                   onClick={() => onSelectPackage && onSelectPackage(pkg.id)}
-                  className="px-6 py-2.5 bg-primary hover:bg-[#123632] text-white rounded-full text-xs font-bold transition-all shadow-sm hover:shadow cursor-pointer"
+                  className="px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white rounded-full text-xs font-bold transition-all shadow-sm hover:shadow-orange-200 hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
                 >
-                  Inquire Now
+                  Inquire Now →
                 </button>
               </div>
             </div>

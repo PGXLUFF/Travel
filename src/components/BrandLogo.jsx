@@ -10,8 +10,8 @@ const BrandLogo = ({ light = false, align = "center" }) => {
     <div className={`flex flex-col select-none cursor-pointer ${alignClass}`}>
       <div className={`relative h-12 w-48 ${light ? "bg-white px-3 py-1.5 rounded-2xl shadow-sm" : ""}`}>
         <Image
-          src="/Image/logo.jpeg"
-          alt="Intro Travels India Holidays"
+          src="/Image/Intro_travels_india.jpeg"
+          alt="Intro Travels India"
           fill
           sizes="192px"
           className="object-contain rounded-lg"

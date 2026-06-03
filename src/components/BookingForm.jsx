@@ -58,7 +58,14 @@ const BookingForm = ({ activePackage = "" }) => {
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "Please enter a valid email address.";
     }
-    if (!formData.phone.trim()) errors.phone = "Phone number is required.";
+    
+    const phoneRegex = /^\+?[0-9\s-]{10,15}$/;
+    if (!formData.phone.trim()) {
+      errors.phone = "Phone number is required.";
+    } else if (!phoneRegex.test(formData.phone)) {
+      errors.phone = "Please enter a valid phone number (10-15 digits).";
+    }
+    
     if (!formData.travelDate) errors.travelDate = "Please choose a departure date.";
     if (Number(formData.travelers) < 1) errors.travelers = "Must have at least 1 traveler.";
 
@@ -72,10 +79,26 @@ const BookingForm = ({ activePackage = "" }) => {
 
     setIsSubmitting(true);
 
+    const selectedPkgObj = domesticPackages.find((p) => p.id === formData.selectedPackage);
+    const packageName = selectedPkgObj ? selectedPkgObj.title : formData.selectedPackage;
+
+    const messageText = `Hello Intro Travels India! I would like to inquire about a tour package:
+• Name: ${formData.fullName}
+• Email: ${formData.email}
+• Phone: ${formData.phone}
+• Package: ${packageName}
+• Travel Date: ${formData.travelDate}
+• Guests: ${formData.travelers}
+• Notes: ${formData.message || "None"}`;
+
+    const encodedText = encodeURIComponent(messageText);
+    const whatsappUrl = `https://wa.me/919870526003?text=${encodedText}`;
+
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitSuccess(true);
-    }, 1500);
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    }, 1200);
   };
 
   const handleResetForm = () => {
@@ -94,26 +117,30 @@ const BookingForm = ({ activePackage = "" }) => {
   const selectedPackageObj = domesticPackages.find((p) => p.id === formData.selectedPackage);
 
   return (
-    <section id="inquiry-form" className="w-full px-6 md:px-12 lg:px-24 py-16 scroll-mt-20">
-      <div className="max-w-[1150px] mx-auto bg-white rounded-[2.5rem] border border-black/[0.03] shadow-lg p-8 md:p-12">
+    <section id="inquiry-form" className="relative w-full px-6 md:px-12 lg:px-24 py-16 scroll-mt-20 overflow-hidden section-cool">
+      <div className="orange-orb w-[300px] h-[300px] -top-10 right-10 opacity-40" />
+      <div className="teal-orb w-[250px] h-[250px] bottom-10 -left-10 opacity-30" />
+      <div className="relative z-10 max-w-[1150px] mx-auto bg-white/90 backdrop-blur-sm rounded-[2.5rem] border border-orange-50 shadow-xl p-8 md:p-12">
         {!submitSuccess ? (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: Brand & Information */}
             <div className="lg:col-span-5 flex flex-col gap-6 text-left lg:pr-4">
-              <span className="text-xs uppercase tracking-wider text-[#3b7c74] font-bold">
-                Why Book With Us
+              <span className="text-xs uppercase tracking-widest font-extrabold text-orange-500">
+                ✦ Why Book With Us
               </span>
               <h2 className="font-display font-bold text-3xl md:text-4xl text-primary leading-tight">
-                Plan Your Perfect <br />
-                Indian Holiday
+                Plan Your Perfect{" "}
+                <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
+                  Indian Holiday
+                </span>
               </h2>
               <p className="text-primary/70 text-sm leading-relaxed">
-                Intro Travels India Holidays is your trusted companion for exploring the soul of India. We design customized itineraries tailored to your unique preferences, budget, and travel style.
+                Intro Travels India is your trusted companion for exploring the soul of India. We design customized itineraries tailored to your unique preferences, budget, and travel style.
               </p>
               
               <div className="flex flex-col gap-5 mt-4">
                 <div className="flex gap-4 items-start">
-                  <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center text-[#3b7c74] shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-500 shrink-0">
                     <Compass size={18} />
                   </div>
                   <div>
@@ -123,7 +150,7 @@ const BookingForm = ({ activePackage = "" }) => {
                 </div>
 
                 <div className="flex gap-4 items-start">
-                  <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center text-[#3b7c74] shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-500 shrink-0">
                     <Shield size={18} />
                   </div>
                   <div>
@@ -133,7 +160,7 @@ const BookingForm = ({ activePackage = "" }) => {
                 </div>
 
                 <div className="flex gap-4 items-start">
-                  <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center text-[#3b7c74] shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-orange-500 shrink-0">
                     <Award size={18} />
                   </div>
                   <div>
@@ -145,11 +172,11 @@ const BookingForm = ({ activePackage = "" }) => {
             </div>
 
             {/* Right Column: Inquiry Form */}
-            <div className="lg:col-span-7 bg-[#F6F7FB] p-6 md:p-8 rounded-[2rem] border border-black/[0.02] w-full">
+            <div className="lg:col-span-7 bg-[#FAF7F2] p-6 md:p-8 rounded-[2rem] border border-black/[0.02] w-full">
               <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2.5 text-left border-b border-black/[0.04] pb-4 mb-2">
-                  <span className="text-xs uppercase tracking-wider text-[#3b7c74] font-bold">
-                    Quick Inquiry
+                  <span className="text-xs uppercase tracking-widest font-extrabold text-orange-500">
+                    ✦ Quick Inquiry
                   </span>
                   <h3 className="font-display font-bold text-xl md:text-2xl text-primary">
                     Request a Custom Quote
@@ -313,7 +340,7 @@ const BookingForm = ({ activePackage = "" }) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 bg-primary hover:bg-[#123632] text-white rounded-full font-semibold text-sm transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 mt-2"
+                  className="w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white rounded-full font-bold text-sm transition-all duration-300 shadow-md hover:shadow-orange-200 hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 mt-2"
                 >
                   {isSubmitting ? (
                     <>
@@ -336,7 +363,7 @@ const BookingForm = ({ activePackage = "" }) => {
         ) : (
           /* Success Card */
           <div className="flex flex-col items-center justify-center py-8 text-center gap-6">
-            <div className="w-16 h-16 rounded-full bg-accent flex items-center justify-center text-[#3b7c74]">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-amber-400 flex items-center justify-center text-white shadow-lg shadow-orange-100">
               <CheckCircle size={40} />
             </div>
             <div className="flex flex-col gap-2">
@@ -347,8 +374,8 @@ const BookingForm = ({ activePackage = "" }) => {
               </p>
             </div>
 
-            <div className="w-full max-w-[500px] bg-[#F6F7FB] border border-black/[0.03] rounded-2xl p-6 text-left my-4 flex flex-col gap-4">
-              <h4 className="text-xs uppercase font-extrabold text-[#3b7c74] tracking-wider border-b border-black/[0.04] pb-2">
+            <div className="w-full max-w-[500px] bg-[#FAF7F2] border border-black/[0.03] rounded-2xl p-6 text-left my-4 flex flex-col gap-4">
+              <h4 className="text-xs uppercase font-extrabold text-orange-500 tracking-wider border-b border-black/[0.04] pb-2">
                 Inquiry Summary
               </h4>
               <div className="grid grid-cols-2 gap-y-3 gap-x-4 text-xs font-semibold text-primary/70">

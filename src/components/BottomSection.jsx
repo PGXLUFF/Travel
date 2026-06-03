@@ -8,14 +8,16 @@ import BrandLogo from "./BrandLogo";
 
 const BottomSection = () => {
   return (
-    <section className="w-full px-6 md:px-12 lg:px-24 py-16 flex flex-col gap-16">
+    <section className="relative w-full px-6 md:px-12 lg:px-24 py-16 flex flex-col gap-16 overflow-hidden">
+      <div className="orange-orb w-[350px] h-[350px] -top-20 -right-20 opacity-40" />
+      <div className="teal-orb   w-[300px] h-[300px] top-40 -left-20 opacity-30" />
       {/* Grid of Guide Offers and Let's Turn Reality */}
       <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         {/* Guide Offers Card */}
-        <div className="lg:col-span-5 bg-white border border-black/[0.03] rounded-[2.5rem] p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow relative overflow-hidden min-h-[300px]">
+        <div className="lg:col-span-5 bg-white border border-black/[0.03] rounded-[2.5rem] p-8 flex flex-col justify-between shadow-sm relative overflow-hidden min-h-[300px] premium-card">
           <div className="flex flex-col gap-4">
-            <span className="text-xs uppercase tracking-wider text-[#3b7c74] font-bold">
-              Our Guides
+            <span className="text-xs uppercase tracking-widest font-extrabold text-orange-500">
+              ✦ Our Guides
             </span>
             <p className="text-primary text-base md:text-lg font-semibold leading-relaxed">
               More than 100 of our professional tour guides are ready to accompany
@@ -58,7 +60,7 @@ const BottomSection = () => {
               </div>
             </div>
 
-            <button className="w-12 h-12 rounded-full bg-primary hover:bg-[#123632] text-white flex items-center justify-center transition-all duration-300 shadow hover:scale-105 cursor-pointer">
+            <button className="w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white flex items-center justify-center transition-all duration-300 shadow-md shadow-orange-100 hover:scale-105 hover:shadow-orange-200 cursor-pointer">
               <ArrowUpRight size={20} />
             </button>
           </div>
@@ -67,8 +69,8 @@ const BottomSection = () => {
         {/* Let's Turn Reality Banner */}
         <div className="lg:col-span-7 relative rounded-[2.5rem] overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300 min-h-[300px] flex items-end p-8 md:p-10">
           <Image
-            src="https://images.unsplash.com/photo-1486873249359-2731bd6dafc7?w=1200&auto=format&fit=crop&q=80"
-            alt="Majestic mountain peak glowing in sunset"
+            src="/Image/banner_india.png"
+            alt="Taj Mahal India at dusk - Intro Travels India"
             fill
             className="object-cover transition-transform duration-1000 group-hover:scale-105"
           />
@@ -77,8 +79,8 @@ const BottomSection = () => {
 
           <div className="relative z-10 w-full flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex flex-col gap-2">
-              <span className="text-xs font-bold tracking-widest text-[#5cbaa5] uppercase">
-                Start Booking
+              <span className="text-xs font-bold tracking-widest text-orange-400 uppercase">
+                ✦ Start Booking
               </span>
               <h3 className="font-display font-extrabold text-3xl md:text-4xl text-white leading-tight">
                 Let's Turn <br />
@@ -86,32 +88,35 @@ const BottomSection = () => {
               </h3>
             </div>
 
-            <button className="px-8 py-4 bg-white text-primary hover:bg-[#E5F0EE] rounded-full font-bold text-sm transition-all duration-300 flex items-center gap-2.5 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 cursor-pointer self-start md:self-end">
-              <span>Visit our platform</span>
+            <a
+              href="/india"
+              className="px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white rounded-full font-bold text-sm transition-all duration-300 flex items-center gap-2.5 shadow-md hover:shadow-orange-300/50 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer self-start md:self-end"
+            >
+              <span>Explore Packages</span>
               <ArrowUpRight size={16} />
-            </button>
+            </a>
           </div>
         </div>
       </div>
 
       {/* Premium Footer */}
       <footer className="w-full bg-primary text-white rounded-[2.5rem] p-10 md:p-16 flex flex-col gap-12 shadow-xl">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           {/* Brand Info */}
-          <div className="md:col-span-5 flex flex-col gap-6">
+          <div className="lg:col-span-4 md:col-span-1 flex flex-col gap-6">
             <div className="flex flex-col gap-3">
               <BrandLogo light={true} align="left" />
               <a 
-                href="https://www.introtravelsindiaholidays.com" 
+                href="https://www.introtravelsindia.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-xs text-[#5cbaa5] font-bold hover:underline tracking-wide"
               >
-                www.introtravelsindiaholidays.com
+                www.introtravelsindia.com
               </a>
             </div>
             <p className="text-white/60 text-sm leading-relaxed max-w-[340px]">
-              Intro Travels India Holidays transforms travel into unforgettable experiences. We craft journeys
+              Intro Travels India transforms travel into unforgettable experiences. We craft journeys
               that inspire, connect, and leave lasting memories.
             </p>
             {/* Socials & Newsletter */}
@@ -136,26 +141,39 @@ const BottomSection = () => {
             </div>
           </div>
 
+          {/* Catalogues Column */}
+          <div className="lg:col-span-3 md:col-span-1 flex flex-col gap-5">
+            <h4 className="font-display font-bold text-lg text-white/90">Catalogues</h4>
+            <ul className="flex flex-col gap-3.5 text-sm text-white/50">
+              <li><Link href="/india" className="hover:text-orange-400 transition-colors">Domestic Packages</Link></li>
+              <li><Link href="/india#kashmir" className="hover:text-orange-400 transition-colors">Kashmir Paradise</Link></li>
+              <li><Link href="/india#andaman" className="hover:text-orange-400 transition-colors">Andaman Tropical Escapes</Link></li>
+              <li><Link href="/india#leh-ladakh" className="hover:text-orange-400 transition-colors">Leh Ladakh Highlands</Link></li>
+              <li><Link href="/india#agra" className="hover:text-orange-400 transition-colors">Majestic Agra Tour</Link></li>
+              <li><Link href="/india#kerala" className="hover:text-orange-400 transition-colors">Kerala Backwaters</Link></li>
+            </ul>
+          </div>
+
           {/* Links Column 1 */}
-          <div className="md:col-span-3 flex flex-col gap-5">
+          <div className="lg:col-span-2 md:col-span-1 flex flex-col gap-5">
             <h4 className="font-display font-bold text-lg text-white/90">About</h4>
             <ul className="flex flex-col gap-3.5 text-sm text-white/50">
-              <li><Link href="/about" className="hover:text-[#5cbaa5] transition-colors">About Us</Link></li>
-              <li><Link href="#" className="hover:text-[#5cbaa5] transition-colors">Our Team</Link></li>
-              <li><Link href="#" className="hover:text-[#5cbaa5] transition-colors">Careers</Link></li>
-              <li><Link href="#" className="hover:text-[#5cbaa5] transition-colors">Our Story</Link></li>
-              <li><Link href="#" className="hover:text-[#5cbaa5] transition-colors">Testimonials</Link></li>
+              <li><Link href="/about" className="hover:text-orange-400 transition-colors">About Us</Link></li>
+              <li><Link href="#" className="hover:text-orange-400 transition-colors">Our Team</Link></li>
+              <li><Link href="#" className="hover:text-orange-400 transition-colors">Careers</Link></li>
+              <li><Link href="#" className="hover:text-orange-400 transition-colors">Our Story</Link></li>
+              <li><Link href="#" className="hover:text-orange-400 transition-colors">Testimonials</Link></li>
             </ul>
           </div>
 
           {/* Links Column 2 */}
-          <div className="md:col-span-4 flex flex-col gap-5">
+          <div className="lg:col-span-3 md:col-span-1 flex flex-col gap-5">
             <h4 className="font-display font-bold text-lg text-white/90">Support</h4>
             <ul className="flex flex-col gap-3.5 text-sm text-white/50">
-              <li><Link href="/contact" className="hover:text-[#5cbaa5] transition-colors">Contact Us</Link></li>
-              <li><Link href="#" className="hover:text-[#5cbaa5] transition-colors">Help Center</Link></li>
-              <li><Link href="#" className="hover:text-[#5cbaa5] transition-colors">Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:text-[#5cbaa5] transition-colors">Terms &amp; Conditions</Link></li>
+              <li><Link href="/contact" className="hover:text-orange-400 transition-colors">Contact Us</Link></li>
+              <li><Link href="#" className="hover:text-orange-400 transition-colors">Help Center</Link></li>
+              <li><Link href="#" className="hover:text-orange-400 transition-colors">Privacy Policy</Link></li>
+              <li><Link href="#" className="hover:text-orange-400 transition-colors">Terms &amp; Conditions</Link></li>
             </ul>
 
             {/* Micro contact form */}
@@ -165,7 +183,7 @@ const BottomSection = () => {
                 placeholder="Get travel updates..."
                 className="bg-transparent text-xs text-white placeholder-white/35 px-4 focus:outline-none w-full"
               />
-              <button className="w-8 h-8 rounded-full bg-white text-primary flex items-center justify-center hover:bg-[#E5F0EE] transition-colors cursor-pointer">
+              <button className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white flex items-center justify-center hover:from-orange-600 hover:to-amber-600 transition-all cursor-pointer shadow-sm">
                 <Send size={12} className="transform rotate-45 -translate-y-[0.5px] translate-x-[0.5px]" />
               </button>
             </div>
@@ -174,7 +192,7 @@ const BottomSection = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/35 font-medium">
-          <span>&copy; {new Date().getFullYear()} Intro Travels India Holidays Ltd. All rights reserved.</span>
+          <span>&copy; {new Date().getFullYear()} Intro Travels India Ltd. All rights reserved.</span>
           <div className="flex gap-6">
             <Link href="#" className="hover:text-white/60">Privacy Statement</Link>
             <Link href="#" className="hover:text-white/60">Cookies Policy</Link>

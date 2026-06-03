@@ -6,11 +6,14 @@
   --color-primary: #0A221F;
   --color-primary-light: #163B37;
   --color-accent: #E5F0EE;
-  --color-neutral-bg: #F6F7FB;
+  --color-neutral-bg: #FAF7F2;
+  --color-orange-accent: #F97316;
+  --color-orange-soft: #FFF8F1;
+  --color-blue-soft: #F2F7FA;
 }
 
 :root {
-  --background: #F6F7FB;
+  --background: #FAF7F2;
   --foreground: #0A221F;
 }
 
@@ -19,7 +22,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #F6F7FB;
+  background-color: #FAF7F2;
   color: #0A221F;
   -webkit-font-smoothing: antialiased;
 }
@@ -33,4 +36,108 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+/* Custom premium animations & design effects */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1.02);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1.02);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-ken-burns {
+  animation: kenburns 20s infinite ease-in-out;
+}
+
+/* Eye-catching premium cards styling with soft teal glow */
+.premium-card {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.premium-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 24px 48px -12px rgba(10, 34, 31, 0.08), 0 8px 24px -8px rgba(59, 124, 116, 0.16) !important;
+  border-color: rgba(59, 124, 116, 0.18) !important;
+}
+
+/* Smooth custom scroll bar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #C5CDCC;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9AA7A5;
+}
+
+/* Orange decorative blur orb */
+.orange-orb {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(249,115,22,0.18) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Teal blur orb */
+.teal-orb {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(59,124,116,0.14) 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Alternating section backgrounds */
+.section-warm {
+  background: linear-gradient(135deg, #FFF8F1 0%, #FAF7F2 100%);
+}
+
+.section-cool {
+  background: linear-gradient(135deg, #F2F7FA 0%, #FAF7F2 100%);
+}
+
+.section-dark-warm {
+  background: linear-gradient(135deg, #0A221F 0%, #163B37 100%);
 }

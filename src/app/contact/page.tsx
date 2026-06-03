@@ -1,12 +1,16 @@
-"use client";
-
 import React from "react";
+import type { Metadata } from "next";
 import { Mail, Phone, MapPin } from "lucide-react";
 import BookingForm from "@/components/BookingForm";
 
+export const metadata: Metadata = {
+  title: "Contact Us - Intro Travels India",
+  description: "Get in touch with Intro Travels India. Reach out for custom itineraries, B2B queries, or domestic package bookings.",
+};
+
 const ContactPage = () => {
   return (
-    <main className="w-full min-h-screen bg-[#F6F7FB] pb-16">
+    <main className="w-full min-h-screen bg-[#FAF7F2] pb-16">
       {/* 1. Header Banner */}
       <section className="relative w-full bg-primary text-white py-20 md:py-28 px-6 md:px-12 lg:px-24 rounded-b-[3.5rem] overflow-hidden shadow-lg">
         {/* Decorative background gradients */}
@@ -18,7 +22,7 @@ const ContactPage = () => {
             Get in Touch &bull; Contact Us
           </span>
           <h1 className="font-display font-bold text-4xl md:text-6xl tracking-tight leading-none text-white">
-            Contact Intro Travels
+            Contact Intro Travels India
           </h1>
           <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-[640px]">
             We are here to help you plan your next unforgettable adventure. 

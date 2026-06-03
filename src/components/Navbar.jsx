@@ -13,6 +13,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", href: "/" },
+    { name: "Destinations", href: "/destinations", dropdown: true },
     { name: "Tour Packages", href: "/india" },
     { name: "About Us", href: "/about" },
     { name: "Contact Us", href: "/contact" },
@@ -29,17 +30,43 @@ const Navbar = () => {
       <div className="hidden md:flex items-center bg-white/70 backdrop-blur-md border border-white/40 shadow-sm rounded-full py-2 px-3">
         <ul className="flex items-center space-x-1">
           {navItems.map((item) => (
-            <li key={item.name}>
+            <li key={item.name} className={item.dropdown ? "relative group" : ""}>
               <Link
                 href={item.href}
                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 block ${
-                  pathname === item.href
+                  pathname === item.href || (item.dropdown && pathname.startsWith("/destinations"))
                     ? "bg-[#0A221F] text-white shadow-sm"
                     : "text-primary/70 hover:text-primary hover:bg-black/5"
                 }`}
               >
                 {item.name}
               </Link>
+              {item.dropdown && (
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-56 hidden group-hover:block z-50">
+                  <div className="bg-white/95 backdrop-blur-md border border-orange-100 rounded-3xl p-4 shadow-xl flex flex-col gap-1">
+                    {[
+                      { name: "Leh Ladakh", href: "/destinations/leh-ladakh" },
+                      { name: "Kashmir", href: "/destinations/kashmir" },
+                      { name: "Goa", href: "/destinations/goa" },
+                      { name: "Kerala", href: "/destinations/kerala" },
+                      { name: "Jaipur", href: "/destinations/jaipur" },
+                      { name: "All Destinations", href: "/destinations", highlight: true }
+                    ].map((sub) => (
+                      <Link
+                        key={sub.name}
+                        href={sub.href}
+                        className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 block text-left ${
+                          sub.highlight 
+                            ? "bg-gradient-to-r from-orange-500 to-amber-500 text-white mt-1.5 text-center" 
+                            : "text-primary/70 hover:text-orange-500 hover:bg-orange-50"
+                        }`}
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -81,13 +108,33 @@ const Navbar = () => {
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                   className={`w-full text-left px-5 py-3 rounded-2xl text-base font-semibold transition-all block ${
-                    pathname === item.href
+                    pathname === item.href || (item.dropdown && pathname.startsWith("/destinations"))
                       ? "bg-[#0A221F] text-white"
                       : "text-primary/80 hover:bg-black/5"
                   }`}
                 >
                   {item.name}
                 </Link>
+                {item.dropdown && (
+                  <div className="flex flex-wrap gap-2 px-5 pt-2 pb-1">
+                    {[
+                      { name: "Leh Ladakh", href: "/destinations/leh-ladakh" },
+                      { name: "Kashmir", href: "/destinations/kashmir" },
+                      { name: "Goa", href: "/destinations/goa" },
+                      { name: "Kerala", href: "/destinations/kerala" },
+                      { name: "Jaipur", href: "/destinations/jaipur" }
+                    ].map((sub) => (
+                      <Link
+                        key={sub.name}
+                        href={sub.href}
+                        onClick={() => setIsOpen(false)}
+                        className="px-3 py-1.5 rounded-full text-xs font-semibold border border-orange-100 text-primary/70 hover:text-orange-500 bg-orange-50/30"
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </li>
             ))}
           </ul>
